@@ -1,2 +1,1 @@
-# python-projects
-Python 小项目开发
+# Python 小项目开发
