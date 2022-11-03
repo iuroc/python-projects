@@ -9,8 +9,8 @@ class Jiexi:
         self.selectType()
 
     def selectType(self):
-        jiexiTypeIndex: int = int(input('请输入序号: '))
         try:
+            jiexiTypeIndex: int = int(input('请输入序号: '))
             self.jiexiType: str = self.jiexiList[jiexiTypeIndex][1]
         except:
             print('输入有误')
