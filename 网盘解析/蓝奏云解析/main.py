@@ -10,6 +10,9 @@ class LanzouJiexi:
     '''
 
     def __init__(self, url: str):
+        if not url:
+            print('请输入 URL')
+            return
         self.url = url
         self.headers = {'user-agent': 'apee'}
 
@@ -43,9 +46,9 @@ class LanzouJiexi:
         postParam['signs'] = re.search(
             r'var ajaxdata = \'(.*?)\'', yuanma).group(1)
         postParam['sign'] = re.search(
-            r'var msigns = \'(.*?)\'', yuanma).group(1)
+            r'var s_sign = \'(.*?)\'', yuanma).group(1)
         postParam['websignkey'] = re.search(
-            r'var cwebsignkeyc = \'(.*?)\'', yuanma).group(1)
+            r'var wsk_sign = \'(.*?)\'', yuanma).group(1)
         return postParam
 
     def __paramStrToDict(self, paramStr: str):
@@ -82,6 +85,14 @@ class LanzouJiexi:
         dataJson = json.loads(r.text)
         return dataJson['dom'] + '/file/' + dataJson['url']
 
+    def getFileList(self):
+        '''
+        获取文件列表
+        url: 文件夹链接
+        '''
+        print(self.url)
+        pass
+
 
 if __name__ == '__main__':
     url = input('请输入URL: ')
@@ -89,5 +100,6 @@ if __name__ == '__main__':
     # url = 'https://www.lanzouw.com/iDTGl0btyk0f'  # 会员
     # url = 'https://oyp.lanzoub.com/iwleSh7qrmj'  # 带密码
     lan = LanzouJiexi(url)
-    downUrl = lan.getDownloadUrl()
-    print('下载地址: ' + downUrl)
+    # downUrl = lan.getDownloadUrl()
+    # print('下载地址: ' + downUrl)
+    fileList = lan.getFileList()
